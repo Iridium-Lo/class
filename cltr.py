@@ -1,15 +1,21 @@
+import calendar
+from typing import Dict
+from datetime import time
+
+UNIT = 'u'
+SUBSTANCE = 's'
+
+
 class DoseWeekday:
     def __init__(self, weekday: int, doses: Dict[time, float]):
-        if not (0 <= weekday < len(calendar.day_name)):
-            raise ValueError(f'{weekday} is not a valid weekday index')
+        self.doses = doses
+        self.weekday = weekday
 
-        self.weekday, self.doses = weekday, doses
-
-    @property
+#//    @property
     def dose_total(self) -> float:
         return sum(self.doses.values())
 
-    @property
+#    @property
     def weekday_name(self) -> str:
         return calendar.day_name[self.weekday]
 
