@@ -2,22 +2,21 @@ from typing import Dict
 
 
 class ConvertToKelvin:
-    def __init__(self, substance: str, temp: Dict[str, int]):
+    def __init__(self, substance: str, data: Dict[str, int]):
         self.substance = substance
-        self.temp = temp
+        self.data = data
 
     def to_kelvin(self, celsius: int) -> int:
         return celsius + 273
 
     def __str__(self):
         sub = self.substance
-        mp = self.to_kelvin(self.temp["mp"])
-        bp = self.to_kelvin(self.temp["bp"])
-
+        mp = self.to_kelvin(self.data["mp"])
+        bp = self.to_kelvin(self.data["bp"])
         return f'{sub}:\n mp: {mp}K\n bp: {bp}K\n'
 
 
-mp_bp_celsius = (
+data = (
     ConvertToKelvin(
         'water',
         {
@@ -34,4 +33,4 @@ mp_bp_celsius = (
     ),
 )
 
-print('\n'.join(str(i) for i in mp_bp_celsius))
+print('\n'.join(str(i) for i in data))
