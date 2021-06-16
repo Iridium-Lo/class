@@ -10,20 +10,20 @@ class Temperature:
         return self.celsius + 273.15
 
     def __str__(self):
-        return f'{self.kelvin} K'
+        return f'{self.kelvin}K'
 
 
 @dataclass(frozen=True)
 class Substance:
     name: str
-    melt: Temperature
-    boil: Temperature
+    mp: Temperature
+    bp: Temperature
 
     def __str__(self):
         return (
             f'{self.name}:\n'
-            f' melt: {self.melt}\n'
-            f' boil: {self.boil}\n'
+            f' mp: {self.mp}\n'
+            f' bp: {self.bp}\n'
         )
 
 
