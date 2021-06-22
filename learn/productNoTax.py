@@ -31,7 +31,7 @@ class Order:
 
     def print(self, f=stdout) -> None:
         print('\n'.join(p.format_row for p in self.products))
-        print(f'total {self.total:10}')
+        print(f'\ntotal {self.total:10}')
 
 
 def main():
@@ -49,6 +49,12 @@ def main():
             Product(
                 name='gylcol', price=Decimal(9.99)
             ),
+            Product(
+                name='jojoba', price=Decimal(7.45)
+            ),
+            Product(
+                name='bandage', price=Decimal(6.95)
+            )
         ],
     )
     order.print()
