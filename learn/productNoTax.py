@@ -1,6 +1,5 @@
 from _decimal import Decimal
 from dataclasses import dataclass
-from sys import stdout
 from typing import Collection
 
 
@@ -29,13 +28,14 @@ class Order:
     def total(self) -> Decimal:
         return sum(i.round for i in self.products)
 
-    def print(self, f=stdout) -> None:
+    @property
+    def print(self) -> None:
         print('\n'.join(p.format_row for p in self.products))
         print(f'\ntotal {self.total:10}')
 
 
 def main():
-    order = Order(
+    cosmetics = Order(
         products=[
             Product(
                 name='saly', price=Decimal(6.99)
@@ -57,7 +57,7 @@ def main():
             )
         ],
     )
-    order.print()
+    cosmetics.print
 
 
 if __name__ == '__main__':
