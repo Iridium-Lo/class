@@ -6,17 +6,24 @@ from typing import Collection
 @dataclass
 class Product:
     name: str
-    price: int
-
+    price: Decimal
+    qty: Decimal
+	
     @property
     def round(self) -> Decimal:
         return round(self.price, 2)
-
+    
+    @property
+    def unit_price(self) -> Decimal:
+        return round(1 / self.qty * self.round, 2)
+	
     @property
     def format_row(self) -> str:
         return (
-            f'{self.name:10} '
-            f'{self.round} '
+            f'{self.name}'
+            f'{"£":>4}{self.round:}'
+            f'{self.qty:>4}'
+            f'{"£":>6}{self.unit_price}'
         )
 
 
@@ -29,36 +36,33 @@ class Order:
         return sum(i.round for i in self.products)
 
     @property
-    def print(self) -> None:
+    def echo(self):
+        print(f'{"name:"}{"price:":>8}{"qty:":>6}{"unit:":>7}')
         print('\n'.join(p.format_row for p in self.products))
-        print(f'\ntotal {self.total:10}')
-
+        print(f'\nT -> {"£":>1}{self.total:}')
+	
 
 def main():
     cosmetics = Order(
         products=[
             Product(
-                name='saly', price=Decimal(6.99)
+                name='saly', price=Decimal(6.99), qty=Decimal(1)
             ),
             Product(
-                name='kojic', price=Decimal(7.99)
+                name='koji', price=Decimal(7.99), qty=Decimal(1)
             ),
             Product(
-                name='jojoba', price=Decimal(7.45)
+                name='jojo', price=Decimal(7.45), qty=Decimal(1)
             ),
             Product(
-                name='gylcol', price=Decimal(9.99)
+                name='glyo', price=Decimal(9.99), qty=Decimal(1)
             ),
             Product(
-                name='jojoba', price=Decimal(7.45)
-            ),
-            Product(
-                name='bandage', price=Decimal(6.95)
+                name='band', price=Decimal(6.95), qty=Decimal(1)
             )
         ],
     )
-    cosmetics.print
-
+    cosmetics.echo
 
 if __name__ == '__main__':
     main()
