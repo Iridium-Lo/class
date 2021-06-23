@@ -21,7 +21,7 @@ class Product:
     def format_row(self) -> str:
         return (
             f'{self.name}'
-            f'{"£":>4}{self.round:}'
+            f'{"£":>4}{self.round}'
             f'{self.qty:>4}'
             f'{"£":>6}{self.unit_price}'
         )
@@ -37,7 +37,7 @@ class Order:
 
     @property
     def echo(self):
-        print(f'{"name:"}{"price:":>8}{"qty:":>6}{"unit:":>7}')
+        print(f'name{"price:":>8}{"qty:":>6}{"unit:":>7}')
         print('\n'.join(p.format_row for p in self.products))
         print(f'\nT -> {"£":>1}{self.total:}')
 	
