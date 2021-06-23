@@ -38,7 +38,7 @@ class Order:
     @property
     def echo(self):
         print(f'name{"price:":>8}{"qty:":>6}{"unit:":>7}')
-        print('\n'.join(p.format_row for p in self.products))
+        print('\n'.join(i.format_row for i you in self.products))
         print(f'\nT -> {"£":>1}{self.total:}')
 	
 
