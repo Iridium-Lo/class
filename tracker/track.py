@@ -25,11 +25,11 @@ class DailyAverageDose:
     def daily_dose(self) -> Decimal:
         return sum(i for i in self.doses)
 
-    def diff(self, times_doses) -> Iterable:
-        return (abs(i - i+1) for i in times_doses)
+    def diff(self) -> Iterable:
+        return (abs(i - i+1) for i in self)
 
-    def mean(self, times_doses) -> Decimal:
-        return sum(i for i in self.diff(times_doses)) / len(times_doses)
+    def mean(self) -> Decimal:
+        return sum(i for i in self.diff(self)) / len(self)
 
     def __str__(self):
         return (
