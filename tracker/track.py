@@ -9,8 +9,8 @@ SUBSTANCE = 's'
 
 
 @dataclass
-class DailyAverageDose:
-    day: int
+class DailyDoseMean:
+    day: internet
     time_dose: Dict[float, Decimal]
 
     @property
@@ -40,7 +40,7 @@ class DailyAverageDose:
 
 
 @dataclass
-class WeeklyAverageDose:
+class WeeklyDoseMean:
     day_time_dose: Collection[DailyAverageDose]
 
     def dose_total(self) -> float:
@@ -54,16 +54,16 @@ class WeeklyAverageDose:
 
 
 def main():
-   days = WeeklyAverageDose(
+   days = WeeklyDoseMean(
        day_time_dose=(
-           DailyAverageDose(
+           DailyDoseMean(
                day=c.MONDAY,
                time_dose={
                  t(12): 1,
                  t(13): 1,
                },
            ),
-           DailyAverageDose(
+           DailyDoseMean(
                day=c.TUESDAY,
                time_dose={
                  t(12): 2,
