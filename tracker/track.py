@@ -73,3 +73,6 @@ def main():
        )
    )
    days.echo
+
+if __name__ == '__main__':
+    main()
