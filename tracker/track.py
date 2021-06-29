@@ -32,11 +32,11 @@ class DailyAverageDose:
         return sum(i for i in self.diff(times_doses)) / len(times_doses)
 
     def __str__(self):
-        return {
+        return (
             f'{self.day}: {self.daily_dose}'
             f'Mtime: {self.mean(self.times)}'
             f'Mdose: {self.mean(self.doses)}'
-        }
+        )
 
 
 @dataclass
@@ -69,7 +69,7 @@ def main():
                  t(12): 2,
                  t(14): 2,
                }
-           ),
+           )
        )
    )
    days.echo
