@@ -40,7 +40,7 @@ class DailyAverageDose:
 
 
 @dataclass
-class DoseWeekday:
+class WeeklyAverageDose:
     day_time_dose: Collection[DailyAverageDose]
 
     def dose_total(self) -> float:
@@ -54,7 +54,7 @@ class DoseWeekday:
 
 
 def main():
-   days = DoseWeekday(
+   days = WeeklyAverageDose(
        day_time_dose=(
            DailyAverageDose(
                day=c.MONDAY,
