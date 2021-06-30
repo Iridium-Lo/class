@@ -12,6 +12,22 @@ SUBSTANCE = 's'
 class DailyDoseMean:
     day: int
     time_dose: Dict[float, Decimal]
+    
+  @property
+    def daily_dose(self) -> Decimal:
+        return sum(i for i in self.doses)
+
+def mean(self) -> Decimal:
+        return sum(
+            i for i in self.diff(self.lst)
+        ) / len(self.lst)
+
+    def diff(self) -> Iterable:
+        return (
+            abs(
+                self.lst[i] - self.lst[i+1]
+            ) for i in enumerate(self.lst - 1)
+        )
 
     @property
     def times(self) -> List[float]:
@@ -31,23 +47,6 @@ class DailyDoseMean:
             ), 2
         )
         
-
-    @property
-    def daily_dose(self) -> Decimal:
-        return sum(i for i in self.doses)
-
-    def diff(self) -> Iterable:
-        return (
-            abs(
-                self.lst[i] - self.lst[i+1]
-            ) for i in enumerate(self.lst - 1)
-        )
-
-    def mean(self) -> Decimal:
-        return sum(
-            i for i in self.diff(self.lst)
-        ) / len(self.lst)
-
     def __str__(self):
         return (
             f'{self.day}: {self.daily_dose}'
