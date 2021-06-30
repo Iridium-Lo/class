@@ -19,7 +19,7 @@ class DailyDoseMean:
             list(
                 self.time_dose
                 .keys()
-            ), 2
+            ), 4
         )
 
     @property
@@ -28,7 +28,7 @@ class DailyDoseMean:
             list(
                 self.time_dose
                 .values()
-            ),2
+            ), 2
         )
         
 
