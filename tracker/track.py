@@ -15,11 +15,22 @@ class DailyDoseMean:
 
     @property
     def times(self) -> List[float]:
-        return list(self.time_dose.keys())
+        return round(
+            list(
+                self.time_dose
+                .keys()
+            ), 2
+        )
 
     @property
     def doses(self) -> List[Decimal]:
-        return list(self.time_dose.values())
+        return round(
+            list(
+                self.time_dose
+                .values()
+            ),2
+        )
+        
 
     @property
     def daily_dose(self) -> Decimal:
@@ -27,13 +38,13 @@ class DailyDoseMean:
 
     def diff(self) -> Iterable:
         return (abs(
-                self.lst[i] - self.lst[i+1]
+            self.lst[i] - self.lst[i+1]
             ) for i in enumerate(self.lst - 1)
-         )
+        )
 
     def mean(self) -> Decimal:
         return sum(
-                i for i in self.diff(self.lst)
+            i for i in self.diff(self.lst)
             ) / len(self.lst)
 
     def __str__(self):
