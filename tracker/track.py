@@ -2,7 +2,7 @@ import calendar as c
 from datetime import time as t
 from decimal import Decimal
 from dataclasses import dataclass
-from typing import Dict, Iterable, Collection
+from typing import Dict, Iterable, Collection, List
 
 UNIT = 'u'
 SUBSTANCE = 's'
@@ -14,11 +14,11 @@ class DailyDoseMean:
     time_dose: Dict[float, Decimal]
 
     @property
-    def times(self) -> list[float]:
+    def times(self) -> List[float]:
         return list(self.time_dose.keys())
 
     @property
-    def doses(self) -> list[Decimal]:
+    def doses(self) -> List[Decimal]:
         return list(self.time_dose.values())
 
     @property
