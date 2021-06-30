@@ -17,7 +17,7 @@ class DailyDoseMean:
     def daily_dose(self) -> Decimal:
         return sum(i for i in self.doses)
 
-def mean(self) -> Decimal:
+    def mean(self) -> Decimal:
         return sum(
             i for i in self.diff(self.lst)
         ) / len(self.lst)
