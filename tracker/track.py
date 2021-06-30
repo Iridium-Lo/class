@@ -37,8 +37,9 @@ class DailyDoseMean:
         return sum(i for i in self.doses)
 
     def diff(self) -> Iterable:
-        return (abs(
-            self.lst[i] - self.lst[i+1]
+        return (
+            abs(
+                self.lst[i] - self.lst[i+1]
             ) for i in enumerate(self.lst - 1)
         )
 
