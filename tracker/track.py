@@ -10,7 +10,7 @@ SUBSTANCE = 's'
 
 @dataclass
 class DailyDoseMean:
-    day: internet
+    day: int
     time_dose: Dict[float, Decimal]
 
     @property
@@ -40,22 +40,22 @@ class DailyDoseMean:
 
 
 @dataclass
-class WeeklyDoseMean:
-    day_time_dose: Collection[DailyAverageDose]
+class WeeklyDose:
+    day_dose_mean: Collection[DailyAverageDose]
 
-    def dose_total(self) -> float:
-        return sum(i for i in self.doses.values())
+    @property
+    def weekly_dose(self) -> float:
+        return sum(i.daily_dose for i in self.day_dose_mean)
 
-    def weekday_name(self) -> str:
-        return (i for i in self.days)
-
-    def __str__(self):
-        return f'{self.weekday_name}: {self.dose_total} {UNIT}'
+    @property
+    def echo(self):
+        print('\n'.join(i.str for i in self.day_dose_mean))
+        print(f'Weekly dose -> {SUBSTANCE}: {self.weekly_dose} {UNIT}'
 
 
 def main():
-   days = WeeklyDoseMean(
-       day_time_dose=(
+   days = WeeklyDose(
+       day_dose_mean=(
            DailyDoseMean(
                day=c.MONDAY,
                time_dose={
