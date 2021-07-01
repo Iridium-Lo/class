@@ -28,7 +28,7 @@ class DayDose:
         )
     
     @property
-    def lsts(self) -> list[Decimal]:
+    def lsts(self) -> List[Decimal]:
         return(
             times = lst(keys, 4)
             doses = lst(values, 2)
@@ -38,6 +38,7 @@ class DayDose:
 @dataclass
 class Mean:
     TimeDose: Collection[DayDose]
+
     def mean_lst(self, key_val, num) -> Decimal:
         return self.mean(self.lst(key_val, num))
 
