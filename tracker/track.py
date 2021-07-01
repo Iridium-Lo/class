@@ -2,7 +2,7 @@ import calendar as c
 from datetime import time as t
 from decimal import Decimal as dec
 from dataclasses import dataclass
-from typing import Dict, Iterable, Collection, List, Decimal
+from typing import List, Dict, Decimal, Iterable, Collection
 
 UNIT = 'u'
 SUBSTANCE = 's'
