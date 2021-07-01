@@ -99,8 +99,7 @@ class WeeklyDoseMean:
                 i.mean(
                     self.day_dose_mean
                     .mean(type)
-                ) 
-                for i in self.day_dose_mean
+                ) for i in self.day_dose_mean
             ) / 7
         )
     
