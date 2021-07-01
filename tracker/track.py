@@ -38,7 +38,7 @@ class DailyDoseMean:
         )
     
     def mean_lst(self, num, key_val) -> Decimal:
-        return self.mean(self.lst(key_val, num)
+        return self.mean(self.lst(key_val, num))
 
     def __str__(self):
         return (
