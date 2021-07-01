@@ -17,7 +17,6 @@ class DayDose:
     def daily_dose(self) -> Decimal:
         return sum(i for i in self.doses)
   
-    @property
     def lst(self, key_val, num) -> List[Decimal]:
         return dec(
             round(
@@ -27,7 +26,8 @@ class DayDose:
                 ), num
             )
         )
-
+    
+    @property
     def lsts(self) -> list[Decimal]:
         return(
             times = lst(keys, 4)
