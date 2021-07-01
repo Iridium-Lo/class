@@ -25,7 +25,7 @@ class DailyDoseMean:
             i for i in self.diff(self.lst)
         ) / len(self.lst)
 
-    def diff(self, lst) -> Iterable:
+    def diff(self, lst) -> Iterable[Decimal]:
         return (
             abs(
                 self.lst[i] - self.lst[i+1]
