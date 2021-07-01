@@ -9,14 +9,35 @@ SUBSTANCE = 's'
 
 
 @dataclass
-class DailyDoseMean:
+class DayDose:
     day: int
     time_dose: Dict[float, float]
-    
-  @property
+
+    @property
     def daily_dose(self) -> Decimal:
         return sum(i for i in self.doses)
+  
+    @property
+    def lst(self, key_val, num) -> List[Decimal]:
+        return dec(
+            round(
+                list(
+                    self.time_dose
+                    .key_val()
+                ), num
+            )
+        )
 
+    def lsts(self) -> list[Decimal]:
+        return(
+            times = lst(keys, 4)
+            doses = lst(values, 2)
+        )
+
+
+@dataclass
+class Mean:
+    TimeDose: Collection[DayDose]
     def mean_lst(self, key_val, num) -> Decimal:
         return self.mean(self.lst(key_val, num))
 
@@ -32,16 +53,7 @@ class DailyDoseMean:
             ) for i in enumerate(self.lst - 1)
         )
 
-    def lst(self, key_val, num) -> List[Decimal]:
-        return dec(
-            round(
-                list(
-                    self.time_dose
-                    .key_val()
-                ), num
-            )
-        )
-
+    
     def __str__(self):
         return (
             f'{self.day}: {self.daily_dose}'
@@ -78,19 +90,23 @@ class WeeklyDose:
 def main():
    days = WeeklyDose(
        day_dose_mean=(
-           DailyDoseMean(
-               day=c.MONDAY,
-               time_dose={
-                 t(12): 1,
-                 t(13): 1,
-               },
+           Mean(
+               DayDose(
+                   day=c.MONDAY,
+                   time_dose={
+                     t(12): 1,
+                     t(13): 1,
+                   }
+               )
            ),
-           DailyDoseMean(
-               day=c.TUESDAY,
-               time_dose={
-                 t(12): 2,
-                 t(14): 2
-               }
+           Mean(
+               DayDose(
+                   day=c.TUESDAY,
+                   time_dose={
+                     t(12): 2,
+                     t(14): 2
+                   }
+               )
            )
        )
    )
