@@ -30,11 +30,13 @@ class DailyDoseMean:
         )
 
     def lst(self, key_val, num) -> List:
-        return round(
-            list(
-                self.time_dose
-                .key_val()
-            ), num
+        return Decimal(
+            round(
+                list(
+                    self.time_dose
+                    .key_val()
+                ), num
+            )
         )
     
     def mean_lst(self, num, key_val) -> Decimal:
