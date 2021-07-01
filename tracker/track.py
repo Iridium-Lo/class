@@ -30,22 +30,14 @@ class DayDose:
     @property
     def lsts(self) -> List[Decimal]:
         return(
-            times = lst(keys, 4)
-            doses = lst(values, 2)
+            times = self.lst(keys, 4)
+            doses = self.lst(values, 2)
         )
 
 
 @dataclass
 class Mean:
     TimeDose: Collection[DayDose]
-
-    def mean_lst(self, key_val, num) -> Decimal:
-        return self.mean(self.lst(key_val, num))
-
-    def mean(self, lst) -> Decimal:
-        return sum(
-            i for i in self.diff(self.lst)
-        ) / len(self.lst)
 
     def diff(self, lst) -> Iterable[Decimal]:
         return (
@@ -54,7 +46,14 @@ class Mean:
             ) for i in enumerate(self.lst - 1)
         )
 
-    
+    def mean(self, lst) -> Decimal:
+        return sum(
+            i for i in self.diff(self.lst)
+        ) / len(self.lst)
+
+    def calc_mean(self, key_val, num) -> Decimal:
+        return self.mean(self.lst(key_val, num))
+
     def __str__(self):
         return (
             f'{self.day}: {self.daily_dose}'
