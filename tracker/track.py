@@ -53,9 +53,16 @@ class WeeklyDose:
     day_dose_mean: Collection[DailyAverageDose]
 
     @property
-    def weekly_dose(self) -> float:
+    def weekly_dose(self) -> Decimal:
         return sum(i.daily_dose for i in self.day_dose_mean)
-
+   
+    def weekly_mean(self, num, key_val) -> Decimal:
+        return sum(
+            i.mean_lst for i in day_dose_mean
+        ) / len(
+                i.day for i in day_dose_mean
+            )
+    
     @property
     def echo(self):
         print('\n'.join(i.str for i in self.day_dose_mean))
