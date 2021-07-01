@@ -41,7 +41,7 @@ class DailyDose:
 
 @dataclass
 class DailyMean:
-    Time_dose: Collection[DayDose]
+    time_dose: Collection[DayDose]
 
     def diff(self, lst) -> Iterable[Decimal]:
         return (
