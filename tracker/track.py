@@ -1,8 +1,8 @@
 import calendar as c
 from datetime import time as t
-from decimal import Decimal
+from decimal import Decimal as d
 from dataclasses import dataclass
-from typing import Dict, Iterable, Collection, List
+from typing import Dict, Iterable, Collection, List, Decimal
 
 UNIT = 'u'
 SUBSTANCE = 's'
@@ -11,11 +11,14 @@ SUBSTANCE = 's'
 @dataclass
 class DailyDoseMean:
     day: int
-    time_dose: Dict[float, Decimal]
+    time_dose: Dict[float, float]
     
   @property
     def daily_dose(self) -> Decimal:
         return sum(i for i in self.doses)
+
+def mean_lst(self, num, key_val) -> Decimal:
+        return self.mean(self.lst(key_val, num))
 
     def mean(self, lst) -> Decimal:
         return sum(
@@ -29,8 +32,8 @@ class DailyDoseMean:
             ) for i in enumerate(self.lst - 1)
         )
 
-    def lst(self, key_val, num) -> List:
-        return Decimal(
+    def lst(self, key_val, num) -> List[Decimal]:
+        return d(
             round(
                 list(
                     self.time_dose
@@ -38,9 +41,6 @@ class DailyDoseMean:
                 ), num
             )
         )
-    
-    def mean_lst(self, num, key_val) -> Decimal:
-        return self.mean(self.lst(key_val, num))
 
     def __str__(self):
         return (
