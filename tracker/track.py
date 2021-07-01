@@ -54,7 +54,10 @@ class WeeklyDose:
 
     @property
     def weekly_dose(self) -> Decimal:
-        return sum(i.daily_dose for i in self.day_dose_mean)
+        return sum(
+            i.daily_dose 
+            for i in self.day_dose_mean
+        )
    
     def weekly_mean(self, num, key_val) -> Decimal:
         return sum(
