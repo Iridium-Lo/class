@@ -58,8 +58,9 @@ class WeeklyDose:
    
     def weekly_mean(self, num, key_val) -> Decimal:
         return sum(
-            i.mean_lst(num, key_val) for i in self.day_dose_mean
-        ) / len(i.day for i in self.day_dose_mean)
+            i.mean_lst(num, key_val) 
+            for i in self.day_dose_mean
+        ) / 7
     
     @property
     def echo(self):
