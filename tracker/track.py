@@ -13,12 +13,12 @@ class DailyDose:
     day: int
     day_time_dose: Dict[float, float]
 
-    def lst(self, key_val, num) -> List[Decimal]:
+    def lst(self, switch, nums) -> List[Decimal]:
         return dec(
             round(
                 list(
                     self.day_time_dose
-                    .key_val()
+                    .switch()
                 ), num
             )
         )
@@ -45,29 +45,38 @@ class DailyMean:
 
     def diff(self, lst) -> Iterable[Decimal]:
         return (
-            abs(
-                self.time_dose.lsts.type[i] - self.time_dose.lsts.type[i+1]
-            ) for i in enumerate(self.time_dose.lsts.type - 1)
+            (
+                abs(
+                    self.time_dose
+                    .lsts.type[i] 
+                    -
+                    self.time_dose
+                   .lsts.type[i+1]
+                ) 
+                for i in enumerate(
+                      self.time_dose
+                      .lsts.type - 1
+                )
+            )
         )
 
     def mean(self, type) -> Decimal:
-        return sum(
-            i for i in self.diff(self.time_dose.lsts.type)
-        ) / len(self.time_dose.lsts.type)
-    
-    @property
-    means(self) -> Decimal:
         return (
-            time = self.mean(times)
-            dose = self.mean(doses)
-        )
+            sum(
+               self.diff(type)
+            ) /
+            len(
+                self.time_dose
+                .lsts.type
+            )
+         )
 
     @property
     def prnt(self):
         return (
             f'{self.daily_dose.prnt_daily}'
-            f'TM: {self.means.time}'
-            f'DM: {self.means.dose}'
+            f'TM: {self.mean(times)}'
+            f'DM: {self.mean(doses)}'
         )
 
 
@@ -77,16 +86,23 @@ class WeeklyDoseMean:
 
     @property
     def weekly_dose(self) -> Decimal:
-        return sum(
-            i.daily_dose 
-            for i in self.day_dose_mean
+        return (
+            sum(
+                i.daily_dose 
+                for i in self.day_dose_mean
+            )
         )
    
     def weekly_mean(self, type) -> Decimal:
-        return sum(
-            i.mean(self.day_dose_mean.means.type)
-            for i in self.day_dose_mean
-        ) / 7
+        return (
+            sum(
+                i.mean(
+                    self.day_dose_mean
+                    .mean(type)
+                ) 
+                for i in self.day_dose_mean
+            ) / 7
+        )
     
     @property
     def echo(self):
