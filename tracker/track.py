@@ -36,12 +36,15 @@ class DailyDoseMean:
                 .key_val()
             ), num
         )
-        
+    
+    def mean_lst(self, num, key_val):
+        return self.mean(self.lst(key_val, num)
+
     def __str__(self):
         return (
             f'{self.day}: {self.daily_dose}'
-            f'Mtime: {self.mean(self.lst(keys, 4))}'
-            f'Mdose: {self.mean(self.lst(values, 2))}'
+            f'Mtime: {self.mean_lst(keys, 4)}'
+            f'Mdose: {self.mean_lst(values, 2)}'
         )
 
 
