@@ -1,139 +1,143 @@
 import calendar as c
-from datetime import time as t
-from decimal import Decimal as dec
+from decimal import Decimal
 from dataclasses import dataclass
-from typing import List, Dict, Decimal, Iterable, Collection
+from typing import List, Dict, Iterable, Collection
 
 UNIT = 'u'
-SUBSTANCE = 's'
+SUBSTANCE = 'phen'
 
 
 @dataclass
 class DailyDose:
     day: int
-    day_time_dose: Dict[float, float]
+    time_dose: Dict[float, float]
 
-    def lst(self, switch, nums) -> List[Decimal]:
-        return dec(
-            round(
-                list(
-                    self.day_time_dose
-                    .switch()
-                ), num
-            )
-        )
-    
     @property
-    def lsts(self) -> List[Decimal]:
-        return(
-            times = self.lst(keys, 4)
-            doses = self.lst(values, 2)
-        )
+    def doses(self) -> List[Decimal]:
+        return [
+            round(
+                Decimal(i), 2
+            ) for i in self.time_dose.values()
+        ]
 
     @property
     def daily_dose(self) -> Decimal:
-        return sum(i for i in self.lsts.doses)
-    
+        return sum(i for i in self.doses)
+
+    @property
+    def mean(self) -> Decimal:
+        return self.daily_dose / len(self.doses)
+
     @property
     def prnt_daily(self):
-        return f'{self.day}: {self.daily_dose}'
+        return (
+            f'{"Day":8} {SUBSTANCE:}  {"dM"}   tM\n'
+            f'{c.day_name[self.day]}: {self.daily_dose}{UNIT} '
+            f'{self.mean}'
+        )
 
 
 @dataclass
-class DailyMean:
-    time_dose: Collection[DayDose]
+class Mean:
+    daily_dose: Collection[DailyDose]
 
-    def diff(self, lst) -> Iterable[Decimal]:
+    @property
+    def times(self) -> List[Decimal]:
+        return [
+            round(
+                Decimal(i), 4
+            ) for i in self.daily_dose.time_dose.keys()
+        ]
+
+    @property
+    def diff(self) -> Iterable[Decimal]:
         return (
-            (
-                abs(
-                    self.time_dose
-                    .lsts.type[i] 
-                    -
-                    self.time_dose
-                   .lsts.type[i+1]
-                ) 
-                for i in enumerate(
-                      self.time_dose
-                      .lsts.type - 1
-                )
-            )
+            abs(
+                self.times[i] - self.times[i+1]
+            ) for i in range(len(self.times) - 1)
         )
 
-    def mean(self, type) -> Decimal:
-        return (
-            sum(
-               self.diff(type)
-            ) /
-            len(
-                self.time_dose
-                .lsts.type
-            )
-         )
+    @property
+    def mean(self) -> Decimal:
+        return sum(self.diff) / len(self.times)
 
     @property
     def prnt(self):
         return (
-            f'{self.daily_dose.prnt_daily}'
-            f'TM: {self.mean(times)}'
-            f'DM: {self.mean(doses)}'
+            f'{self.daily_dose.prnt_daily} '
+            f'{self.mean} '
         )
 
 
 @dataclass
 class WeeklyDoseMean:
-    day_dose_mean: Collection[mean]
+    day_dose_mean: Collection[Mean]
 
     @property
     def weekly_dose(self) -> Decimal:
-        return (
-            sum(
-                i.daily_dose 
-                for i in self.day_dose_mean
-            )
+        return sum(
+            i.daily_dose
+            for i in self.day_dose_mean
         )
-   
-    def weekly_mean(self, type) -> Decimal:
-        return (
-            sum(
-                i.mean(
-                    self.day_dose_mean
-                    .mean(type)
-                ) for i in self.day_dose_mean
-            ) / 7
-        )
-    
+
+    def weekly_mean(self, lst) -> Decimal:
+        return sum(
+            i.mean(lst)
+            for i in self.day_dose_mean
+        ) / 7
+
     @property
     def echo(self):
         print('\n'.join(i.prnt for i in self.day_dose_mean))
-        print(f'Weekly dose -> {SUBSTANCE}: {self.weekly_dose} {UNIT}')
-        print(f'Weekly dose -> mean: {self.weekly_mean(dose)}')
-        print(f'Weekly time -> mean: {self.weekly_mean(time)}')
+
+     #   print(
+      #      f'Weekly time -> mean: {self.weekly_mean(self.day_dose_mean.daily_dose.times)}'
+           # f'Weekly dose -> mean: {self.weekly_mean(self.day_dose_mean.daily_dose.doses)}'
+           # f'Weekly dose -> {SUBSTANCE}: {self.weekly_dose} {UNIT}'
+    #    )
+
 
 def main():
-   days = WeeklyDoseMean(
-       day_dose_mean=(
-           DailyMean(
-               DailyDose(
-                   day=c.MONDAY,
-                   time_dose={
-                     t(12): 1,
-                     t(13): 1,
-                   }
-               )
-           ),
-           DailyMean(
-               DailyDose(
-                   day=c.TUESDAY,
-                   time_dose={
-                     t(12): 2,
-                     t(14): 2
-                   }
-               )
-           )
-       )
-   )
-   days.echo
+    days=Mean(
+        DailyDose(
+            day=c.TUESDAY,
+            time_dose={
+              12: 2,
+              14: 2
+            }
+        )
+    )
+    print(days.prnt)
+
+
+
+
+
+
+    days = WeeklyDoseMean(
+        day_dose_mean=(
+            Mean(
+                DailyDose(
+                    day=c.MONDAY,
+                    time_dose={
+                      12: 1,
+                      13: 1,
+                    }
+                )
+            ),
+            Mean(
+                DailyDose(
+                    day=c.TUESDAY,
+                    time_dose={
+                      12: 2,
+                      14: 2
+                    }
+                )
+            )
+        )
+    )
+
+
 
 if __name__ == '__main__':
     main()
