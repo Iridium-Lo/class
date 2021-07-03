@@ -57,7 +57,7 @@ class DayDoseMean:
 
 
 @dataclass
-class WeeklyDoseMean:
+class WeekDoseMean:
     week_dose_mean: Collection[DayDoseMean]
 
     @property
@@ -109,7 +109,7 @@ class WeeklyDoseMean:
 
 
 def main():
-    days = WeeklyDoseMean(
+    days = WeekDoseMean(
         week_dose_mean=(
             DayDoseMean(
                 day='Mon',
