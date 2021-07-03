@@ -31,7 +31,6 @@ class DailyDose:
     @property
     def prnt_daily(self):
         return (
-            f'{"Day":8} {SUBSTANCE:}  {"dM"}   tM\n'
             f'{c.day_name[self.day]}: {self.daily_dose}{UNIT} '
             f'{self.mean}'
         )
@@ -88,32 +87,17 @@ class WeeklyDoseMean:
 
     @property
     def echo(self):
+        print(f'{"Day":8} {SUBSTANCE:}  {"dM"}   tM')
         print('\n'.join(i.prnt for i in self.day_dose_mean))
 
-     #   print(
-      #      f'Weekly time -> mean: {self.weekly_mean(self.day_dose_mean.daily_dose.times)}'
+      #  print(
+           # f'Weekly time -> mean: {self.weekly_mean(self.day_dose_mean.daily_dose.times)}'
            # f'Weekly dose -> mean: {self.weekly_mean(self.day_dose_mean.daily_dose.doses)}'
            # f'Weekly dose -> {SUBSTANCE}: {self.weekly_dose} {UNIT}'
-    #    )
+      #  )
 
 
 def main():
-    days=Mean(
-        DailyDose(
-            day=c.TUESDAY,
-            time_dose={
-              12: 2,
-              14: 2
-            }
-        )
-    )
-    print(days.prnt)
-
-
-
-
-
-
     days = WeeklyDoseMean(
         day_dose_mean=(
             Mean(
@@ -136,7 +120,7 @@ def main():
             )
         )
     )
-
+    days.echo
 
 
 if __name__ == '__main__':
