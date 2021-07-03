@@ -15,7 +15,7 @@ class DayDoseMean:
     def doses(self) -> List[Decimal]:
         return [
             round(
-                Decimal(i), 2
+                Decimal(i), 1
             ) for i in self.time_dose.values()
         ]
 
@@ -23,7 +23,7 @@ class DayDoseMean:
     def times(self) -> List[Decimal]:
         return [
             round(
-                Decimal(i), 4
+                Decimal(i), 2
             ) for i in self.time_dose.keys()
         ]
 
@@ -50,8 +50,9 @@ class DayDoseMean:
     @property
     def prnt(self):
         return (
-            f'{self.day}: {self.daily_dose}{UNIT:2} '
-            f'{self.mean} {self.time_mean:>4}'
+            f'{self.day}{":":4}'
+            f'{self.daily_dose}{UNIT:4}'
+            f'{self.mean}{self.time_mean:7}'
         )
 
 
@@ -72,7 +73,7 @@ class WeeklyDoseMean:
             sum(
                 i.mean
                 for i in self.week_dose_mean
-            ) / 7, 2
+            ) / 7, 1
         )
 
     @property
@@ -81,26 +82,29 @@ class WeeklyDoseMean:
             sum(
                 i.time_mean
                 for i in self.week_dose_mean
-            ) / 7, 4
+            ) / 7, 2
          )
 
     @property
     def echo(self):
         print(
-        f'---------------------------\n'
-        f'{"Day":4} {SUBSTANCE:}  dM   tM\n'
-        f'---------------------------'
+            f'\n--------------------------\n'
+            f'{"Day":7}{SUBSTANCE:7}{"dM":6}tM\n'
+            f'--------------------------'
         )
 
         print('\n'.join(i.prnt for i in self.week_dose_mean))
 
         print(
-        f'---------------------------\n'
-        f'Weekly dose -> mean: {self.weekly_mean}\n'
-        f'Weekly time -> mean: {self.weekly_time_mean}\n'
-        f'---------------------------\n'
-        f'Weekly dose -> {SUBSTANCE}: {self.weekly_dose}{UNIT}\n'
-        f'---------------------------'
+            f'--------------------------\n'
+            f'Weekly {"dM":4} -> mean: '
+            f'{self.weekly_mean}\n'
+            f'Weekly {"tM":4} -> mean: '
+            f'{self.weekly_time_mean}\n'
+            f'--------------------------\n'
+            f'Weekly dose -> '
+            f'{SUBSTANCE}: {self.weekly_dose}{UNIT}\n'
+            f'--------------------------'
         )
 
 
