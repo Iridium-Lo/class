@@ -89,7 +89,8 @@ class WeekDoseMean:
     def echo(self):
         print(
             f'\n--------------------------\n'
-            f'{"Day":7}{SUBSTANCE:7}{"dM":6}tM\n'
+            f'{"Day":7}{SUBSTANCE:7}'
+            f'{"dM":6}tM\n'
             f'--------------------------'
         )
 
@@ -108,8 +109,8 @@ class WeekDoseMean:
             f'Weekly {"tM":4} -> mean: '
             f'{self.weekly_time_mean}\n'
             f'--------------------------\n'
-            f'Weekly dose -> '
-            f'{SUBSTANCE}: {self.weekly_dose}{UNIT}\n'
+            f'Weekly dose -> {SUBSTANCE}:'
+            f'{self.weekly_dose}{UNIT}\n'
             f'--------------------------'
         )
 
