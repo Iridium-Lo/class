@@ -99,7 +99,7 @@ class WeekDoseMean:
                 i.prnt 
                 for i in self.week_dose_mean
             )
-         )
+        )
 
         print(
             f'--------------------------\n'
