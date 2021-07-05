@@ -83,7 +83,7 @@ class WeekDoseMean:
                 i.time_mean
                 for i in self.week_dose_mean
             ) / 7, 2
-         )
+        )
 
     @property
     def echo(self):
