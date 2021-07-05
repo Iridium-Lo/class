@@ -96,7 +96,8 @@ class WeekDoseMean:
         print(
             '\n'
             .join(
-                i.prnt for i in self.week_dose_mean
+                i.prnt 
+                for i in self.week_dose_mean
             )
          )
 
